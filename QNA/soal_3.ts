@@ -11,15 +11,18 @@ class Transaction {
     public readonly type: TransactionType,
     public readonly amount: number,
     public readonly date: Date,
-    public readonly description: string
-  ) { }
+    public readonly description: string,
+  ) {}
 }
 
 class Account {
   private balance: number = 0;
   private transactions: Transaction[] = [];
 
-  constructor(public readonly accountId: string, public readonly owner: string) { }
+  constructor(
+    public readonly accountId: string,
+    public readonly owner: string,
+  ) {}
 
   public getBalance(): number {
     return this.balance;
@@ -30,7 +33,11 @@ class Account {
       throw new Error("Deposit amount must be greater than zero.");
     }
     this.balance += amount;
-    this.recordTransaction(TransactionType.DEPOSIT, amount, `Deposit of ${amount}`);
+    this.recordTransaction(
+      TransactionType.DEPOSIT,
+      amount,
+      `Deposit of ${amount}`,
+    );
   }
 
   public withdraw(amount: number): void {
@@ -41,7 +48,11 @@ class Account {
       throw new Error("Insufficient balance.");
     }
     this.balance -= amount;
-    this.recordTransaction(TransactionType.WITHDRAWAL, amount, `Withdrawal of ${amount}`);
+    this.recordTransaction(
+      TransactionType.WITHDRAWAL,
+      amount,
+      `Withdrawal of ${amount}`,
+    );
   }
 
   public transfer(amount: number, recipient: Account): void {
@@ -56,37 +67,36 @@ class Account {
     this.recordTransaction(
       TransactionType.TRANSFER,
       amount,
-      `Transfer of ${amount} to account ${recipient.accountId}`
+      `Transfer of ${amount} to account ${recipient.accountId}`,
     );
   }
 
-
-  private recordTransaction(type: TransactionType, amount: number, description: string): void {
+  private recordTransaction(
+    type: TransactionType,
+    amount: number,
+    description: string,
+  ): void {
     const transaction = new Transaction(
       this.generateTransactionId(),
       type,
       amount,
       new Date(),
-      description
+      description,
     );
     this.transactions.push(transaction);
   }
 
-
   public getTransactionHistory(): Transaction[] {
     return this.transactions;
   }
-
 
   private generateTransactionId(): string {
     return `TX-${Date.now()}-${Math.floor(Math.random() * 10000)}`;
   }
 }
 
-
 const account1 = new Account("USR001", "Obi mikel");
 const account2 = new Account("USR002", "Jaden byon");
-
 
 try {
   account1.deposit(1000);
