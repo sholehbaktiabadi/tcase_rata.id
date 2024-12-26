@@ -16,6 +16,10 @@ export class Catalogue{
     @Column()
     category: string;
 
+    @Field()
+    @Column({ type: 'bigint' })
+    price: number;
+
     @Field({ nullable: true })
     @DeleteDateColumn({ nullable: true })
     deleted_at: Date;

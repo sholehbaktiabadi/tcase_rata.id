@@ -1,3 +1,5 @@
+// 1. TypeScript 
+
 // TypeScript adalah bahasa pemrograman yang merupakan superset dari JavaScript, 
 // yang berarti TypeScript menambahkan fitur tambahan ke JavaScript tetapi tetap kompatibel
 // dengan kode JavaScript. Kode TypeScript dikompilasi (ditranspiler) menjadi JavaScript 
@@ -5,13 +7,14 @@
 
 // contoh sederhana ( interface & func )
 
-// interfcae
-interface User {
+
+// interface
+interface UserX {
     name: string;
     age: number;
 }
 
-const user: User = { name: "Alice", age: 30 };
+const user: UserX = { name: "John Doe", age: 30 };
 
 // func
 function calculate(n1: number, n2: number){

@@ -1,4 +1,4 @@
-import { IsString, MinLength } from "class-validator";
+import { IsNumber, IsOptional, IsString, Min, MinLength } from "class-validator";
 import { InputType, Field } from "type-graphql";
 
 @InputType()
@@ -8,6 +8,11 @@ export class CreateCatalogueDto {
   name: string;
 
   @Field()
+  @IsNumber()
+  @Min(1)
+  price: number;
+
+  @Field()
   @IsString()
   category: string;
 }
@@ -15,8 +20,17 @@ export class CreateCatalogueDto {
 @InputType()
 export class UpdateCatalogueDto {
   @Field({ nullable: true })
+  @IsString()
+  @IsOptional()
   name: string;
 
   @Field({ nullable: true })
+  @IsNumber()
+  @IsOptional()
+  price: number;
+
+  @Field({ nullable: true })
+  @IsString()
+  @IsOptional()
   category: string;
 }

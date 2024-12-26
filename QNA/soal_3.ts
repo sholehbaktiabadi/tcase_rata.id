@@ -1,4 +1,4 @@
-
+// 3. Object-Oriented Programming (OOP)
 enum TransactionType {
   DEPOSIT = "DEPOSIT",
   WITHDRAWAL = "WITHDRAWAL",
@@ -84,8 +84,8 @@ class Account {
 }
 
 
-const account1 = new Account("ACC001", "Obi mikel");
-const account2 = new Account("ACC002", "Jaden byon");
+const account1 = new Account("USR001", "Obi mikel");
+const account2 = new Account("USR002", "Jaden byon");
 
 
 try {

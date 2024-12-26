@@ -1,3 +1,5 @@
+-- 2. Database Schema Design
+
 CREATE TABLE Users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(50) UNIQUE NOT NULL,
@@ -57,35 +59,35 @@ CREATE TABLE Payments (
     FOREIGN KEY (order_id) REFERENCES Orders(id) ON DELETE CASCADE
 );
 
---Relasi Antar Tabel
+-- Relasi Antar Tabel
 
--- Users -> Orders
--- Relasi satu-ke-banyak: Satu pengguna dapat memiliki banyak pesanan. (Users.id -> Orders.user_id).
+/* Users -> Orders
+/* Relasi One2Many: Satu pengguna dapat memiliki banyak pesanan. (Users.id -> Orders.user_id).
  
--- Orders -> OrderDetails
--- Relasi satu-ke-banyak: Satu pesanan dapat memiliki banyak detail produk. (Orders.id -> OrderDetails.order_id).
+/* Orders -> OrderDetails
+/* Relasi One2Many: Satu pesanan dapat memiliki banyak detail produk. (Orders.id -> OrderDetails.order_id).
 
--- Products -> OrderDetails
--- Relasi satu-ke-banyak: Satu produk dapat muncul di banyak pesanan. (Products.id -> OrderDetails.product_id).
+/* Products -> OrderDetails
+/* Relasi One2Many: Satu produk dapat muncul di banyak pesanan. (Products.id -> OrderDetails.product_id).
 
--- Orders -> Payments
--- Relasi satu-ke-satu: Satu pesanan memiliki satu transaksi pembayaran. (Orders.id -> Payments.order_id).
+/* Orders -> Payments
+/* Relasi satu-ke-satu: Satu pesanan memiliki satu transaksi pembayaran. (Orders.id -> Payments.order_id).
 
 
 
 -- Keputusan Desain
 
--- Indeks pada Kolom Pencarian:
--- Indeks pada kolom seperti username, email, dan order_id memastikan performa pencarian tetap optimal.
+/* Indeks pada Kolom Pencarian:
+/* Indeks pada kolom seperti username, email, dan order_id memastikan performa pencarian tetap optimal.
 
--- ENUM untuk Status dan Metode:
--- ENUM digunakan untuk memastikan validitas data dan menghindari kesalahan penulisan pada status pesanan atau metode pembayaran.
+/* ENUM untuk Status dan Metode:
+/* ENUM digunakan untuk memastikan validitas data dan menghindari kesalahan penulisan pada status pesanan atau metode pembayaran.
 
--- Relasi dengan Foreign Key:
--- Foreign key digunakan untuk menjaga konsistensi data antar tabel. Contoh, jika pengguna dihapus, maka pesanan terkait juga ikut dihapus (ON DELETE CASCADE).
+/* Relasi dengan Foreign Key:
+/* Foreign key digunakan untuk menjaga konsistensi data antar tabel. Contoh, jika pengguna dihapus, maka pesanan terkait juga ikut dihapus (ON DELETE CASCADE).
 
--- Skalabilitas:
--- Desain ini modular sehingga setiap tabel dapat dioptimalkan atau diperluas tanpa memengaruhi tabel lain.
+/* Skalabilitas:
+/* Desain ini modular sehingga setiap tabel dapat dioptimalkan atau diperluas tanpa memengaruhi tabel lain.
 
--- Normalisasi Data:
--- Data dinormalisasi untuk menghindari duplikasi, kecuali pada kolom price di OrderDetails, yang disimpan terpisah untuk menangkap harga saat transaksi terjadi.
+/* Normalisasi Data:
+/* Data dinormalisasi untuk menghindari duplikasi, kecuali pada kolom price di OrderDetails, yang disimpan terpisah untuk menangkap harga saat transaksi terjadi.
